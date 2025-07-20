@@ -1,4 +1,10 @@
-ErrorDocument 404/404.html
+RewriteEngine On
+
+RewriteRule ^\.well-known/discord$ /wellknown/discord [L]
 
 AddType text/css .css
 AddType application/javascript .js
+
+
+ErrorDocument 404/404.html
+
