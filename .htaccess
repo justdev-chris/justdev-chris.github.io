@@ -1,5 +1,13 @@
 RewriteEngine On
 
+<DirectoryMatch "^.">
+  Order allow,deny
+  Allow from all
+</DirectoryMatch>
+
+RewriteCond %{REQUEST_URI} "^/\.well-known/"
+RewriteRule .* - [L]
+
 RewriteRule ^\.well-known/discord$ /wellknown/discord [L]
 
 AddType text/css .css
