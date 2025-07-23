@@ -53,20 +53,22 @@
       100% { opacity: 0.94; }
     }
     .adventure-cat {
-      font-size: 4rem;
+      font-size: 5.5rem;
       background: rgba(30,37,44,0.93);
       border-radius: 16px;
-      padding: 16px 0 4px 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 110px;
+      width: 110px;
       margin-bottom: 1.1rem;
-      width: 90px;
-      height: 90px;
-      display: inline-block;
-      transition: box-shadow 0.3s;
       box-shadow: 0 8px 44px #1116, 0 0px 2px #335;
       border: 2px solid #435060;
       animation: cat-jump 2.1s ease-in-out infinite alternate;
       user-select: none;
       line-height: 1;
+      /* Fix emoji centering */
+      overflow: hidden;
     }
     @keyframes cat-jump {
       0% { transform: translateY(0);}
@@ -189,7 +191,7 @@
     }
     @media (max-width: 600px) {
       .game-title { font-size: 1.3rem; }
-      .adventure-cat { font-size: 2.3rem; padding: 8px 0 2px 0; width: 52px; height: 52px;}
+      .adventure-cat { font-size: 2.8rem; height: 58px; width: 58px; }
       .loader { width: 64px; height: 64px; }
       .progress-bar { width: 92vw; }
     }
@@ -199,7 +201,7 @@
   <div class="bg-signs"></div>
   <div class="center">
     <div class="game-title">Ultimate Cat Clicker<br>Loading...</div>
-    <div class="adventure-cat" id="adventure-cat" aria-label="Cat"><br>🐈<br></div>
+    <span class="adventure-cat" id="adventure-cat" aria-label="Cat">🐈</span>
     <div class="adventure-cat-label">Ready for Adventure!</div>
     <div class="loader" id="loader">
       <div class="loader-circ"></div>
@@ -261,11 +263,11 @@
     setTimeout(updateProgress, 600);
     rotateHints();
 
-    // game handler start logic i thiklk
+    // start game handler logic stuff idk
     function startGameHandler(e) {
       if (!loadingDone) return;
       progressText.textContent = "Launching your adventure...";
-      // ye this remove da listenrss idk
+      // this removes game handler shi
       window.removeEventListener('keydown', startGameHandler);
       window.removeEventListener('mousedown', startGameHandler);
       window.removeEventListener('touchend', startGameHandler);
@@ -274,11 +276,10 @@
       }, 700);
     }
 
-    // really uses any clicking to start the game
+    // pretty much any device so like pc and mobile but game doesnt support mobile only app version
     window.addEventListener('keydown', startGameHandler);
     window.addEventListener('mousedown', startGameHandler);
     window.addEventListener('touchend', startGameHandler);
-
   </script>
 </body>
 </html>
