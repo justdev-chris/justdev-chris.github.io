@@ -1,1 +1,1 @@
-# [catsdevs](https://catsdevs.cpx.ct.ws/)
+# [catsdevs](https://catsdevs.online/)
