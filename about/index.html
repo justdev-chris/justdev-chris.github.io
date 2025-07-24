@@ -16,11 +16,6 @@
             --border: #282850;
             --shadow: 0 8px 32px 0 rgba(36, 32, 84, 0.44);
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
         body {
             background: var(--bg);
             font-family: 'Roboto', Arial, sans-serif;
@@ -208,6 +203,48 @@
         .contact a:hover {
             text-shadow: 0 2px 16px #f2b13440;
         }
+        /* --- Music Player Styles --- */
+        .player-wrap {
+            margin: 28px auto 0 auto;
+            max-width: 410px;
+            background: rgba(36,32,84,0.35);
+            border-radius: 18px;
+            box-shadow: 0 2px 22px #4b3fd970;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            z-index: 10;
+            position: relative;
+        }
+        .player-btn {
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.5em;
+            color: #2d2a5a;
+            cursor: pointer;
+            box-shadow: 0 2px 12px #f2b13420;
+            transition: background 0.18s, transform 0.14s;
+        }
+        .player-btn:active {
+            background: #f2b134cc;
+            transform: scale(0.94);
+        }
+        .player-slider {
+            flex: 1;
+            accent-color: var(--accent);
+            margin: 0 12px;
+        }
+        .player-label {
+            font-size: 0.95em;
+            color: var(--accent);
+            margin-left: 12px;
+            opacity: 0.8;
+        }
+        /* Footer styles */
         .footer {
             margin: 60px auto 0 auto;
             text-align: center;
@@ -264,23 +301,12 @@
             .dev-alias { font-size: 1.5rem;}
             .projects-list { flex-direction: column; }
             .footer-link { font-size: 1rem; padding: 8px 14px;}
+            .player-wrap { max-width: 98vw; padding: 10px 8px; gap: 10px;}
         }
     </style>
 </head>
 <body>
     <audio id="bg-music" src="track.mp3" preload="auto"></audio>
-    <script>
-      // so once they click the music plays
-      let musicStarted = false;
-      document.addEventListener('click', function () {
-        if (!musicStarted) {
-          const audio = document.getElementById('bg-music');
-          audio.volume = 0.25;
-          audio.play();
-          musicStarted = true;
-        }
-      }, { once: true });
-    </script>
     <div class="container">
         <div class="header">
             <!-- IS THE DEV. lol js kidding -->
@@ -292,8 +318,8 @@
                     <span class="status">🌟 Making things happen</span>
                 </div>
                 <div class="bio">
-                    Coder & game creator. I love building cool projects, especially games and web stuff.<br>
-                    Always learning, always making!
+                    Coder & game creator. I build cool projects, like games and web stuff.<br>
+                    always learning, always making...
                 </div>
                 <!-- spinny silly cat :3 -->
                 <img class="gif-preview" src="https://c.tenor.com/3DzhsHs_8G8AAAAC/tenor.gif" alt="profile gif">
@@ -330,11 +356,58 @@
             <a href="https://catsdevs.online" target="_blank">Ultimate Cat Clicker</a>
             <a href="https://github.com/justdev-chris" target="_blank">GitHub</a>
         </div>
+
+        <!-- music player (totally not a boombox, promise) -->
+        <div class="player-wrap" id="player-wrap">
+            <button class="player-btn" id="player-play" title="Play/Pause" aria-label="Play/Pause">▶️</button>
+            <input class="player-slider" id="player-volume" type="range" min="0" max="1" step="0.01" value="0.25" title="Volume">
+            <span class="player-label" id="player-status">volume: 25%</span>
+        </div>
     </div>
     <footer class="footer">
       <a class="footer-link" href="https://github.com/justdev-chris" target="_blank" rel="noopener noreferrer">
-        <span>made by justdev-chris :3</span>
+        <span>made by justdev-chris :3 (if you see bugs, just tell me &lt;3)</span>
       </a>
     </footer>
+    <script>
+      // only play music once user interacts (browser requirement)
+      let musicStarted = false;
+      const audio = document.getElementById('bg-music');
+      const playBtn = document.getElementById('player-play');
+      const volSlider = document.getElementById('player-volume');
+      const statusLabel = document.getElementById('player-status');
+
+      // try to play on click anywhere (first time only)
+      document.addEventListener('click', function () {
+        if (!musicStarted) {
+          audio.volume = volSlider.value;
+          audio.play();
+          playBtn.textContent = "⏸️";
+          statusLabel.textContent = `volume: ${Math.round(audio.volume*100)}%`;
+          musicStarted = true;
+        }
+      }, { once: true });
+
+      // controls for the music
+      playBtn.addEventListener('click', function (e) {
+        if (audio.paused) {
+          audio.play();
+          playBtn.textContent = "⏸️";
+        } else {
+          audio.pause();
+          playBtn.textContent = "▶️";
+        }
+      });
+
+      volSlider.addEventListener('input', function () {
+        audio.volume = volSlider.value;
+        statusLabel.textContent = `volume: ${Math.round(audio.volume*100)}%`;
+      });
+
+      // ui updater logic thing
+      audio.addEventListener('ended', function() {
+        playBtn.textContent = "▶️";
+      });
+    </script>
 </body>
 </html>
