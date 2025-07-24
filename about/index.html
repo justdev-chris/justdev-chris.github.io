@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - catsdev</title>
+    <title>cats go brrrr</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2d2a5a;
+            --primary: #ececff;
             --accent: #f2b134;
-            --bg: #f7f9fc;
-            --card-bg: #fff;
-            --text: #282828;
-            --gradient: linear-gradient(90deg, #2d2a5a 0%, #f2b134 100%);
+            --bg: #161624;
+            --card-bg: rgba(30, 30, 50, 0.94);
+            --text: #ececff;
+            --gradient: linear-gradient(90deg, #4b3fd9 0%, #f2b134 100%);
+            --border: #282850;
+            --shadow: 0 8px 32px 0 rgba(36, 32, 84, 0.44);
         }
         * {
             box-sizing: border-box;
@@ -25,26 +27,41 @@
             color: var(--text);
             min-height: 100vh;
             padding: 40px;
+            position: relative;
+            overflow-x: hidden;
         }
         .container {
             max-width: 900px;
-            margin: 40px auto;
+            margin: 40px auto 40px auto;
             background: var(--card-bg);
-            box-shadow: 0 6px 30px rgba(44,34,84,0.14);
+            box-shadow: var(--shadow);
             border-radius: 24px;
             padding: 48px 36px;
             position: relative;
             overflow: hidden;
+            border: 1.5px solid var(--border);
         }
-        .container::before {
+        .container::before,
+        .container::after {
             content: '';
             position: absolute;
-            top: -80px; right: -120px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .container::before {
+            top: -90px; right: -120px;
             width: 300px; height: 300px;
             background: var(--gradient);
             border-radius: 50%;
-            opacity: 0.13;
-            z-index: 0;
+            opacity: 0.10;
+            filter: blur(4px);
+        }
+        .container::after {
+            left: -80px; bottom: -100px;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, #4b3fd9 0%, transparent 80%);
+            opacity: 0.1;
+            filter: blur(6px);
         }
         .header {
             display: flex;
@@ -54,13 +71,14 @@
         }
         .profile-img {
             width: 110px;
+            height: 110px;
             border-radius: 50%;
             border: 4px solid var(--accent);
-            box-shadow: 0 4px 18px rgba(44,34,84,0.14);
+            box-shadow: 0 4px 22px rgba(44,34,84,0.18);
             margin-bottom: 8px;
             margin-right: 32px;
             object-fit: cover;
-            background: #eee;
+            background: #22223b;
         }
         .info-block {
             display: flex;
@@ -75,26 +93,34 @@
             color: var(--primary);
             margin-right: 10px;
             letter-spacing: 1px;
+            text-shadow: 0 2px 24px #4b3fd980;
+            background: linear-gradient(90deg, #f2b134 0%, #ececff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .pronouns, .status {
             font-size: 1.05rem;
             background: var(--accent);
-            color: #fff;
+            color: #2d2a5a;
             border-radius: 12px;
             padding: 2px 14px;
             margin-right: 4px;
             font-weight: 600;
-            letter-spacing: 0.01em;
+            letter-spacing: 0.02em;
             display: inline-block;
+            box-shadow: 0 2px 12px #f2b13420;
         }
         .status {
-            background: #2d2a5a;
+            background: #4b3fd9;
+            color: #fff;
         }
         .bio {
             font-size: 1.15rem;
             margin: 10px 0 8px 0;
-            color: #444;
+            color: #b8bbea;
             font-style: italic;
+            line-height: 1.6;
+            text-shadow: 0 1px 0 #32326480;
         }
         .gif-preview {
             margin: 10px 0 0 0;
@@ -102,9 +128,9 @@
             height: 70px;
             border-radius: 12px;
             object-fit: cover;
-            box-shadow: 0 2px 8px rgba(44,34,84,0.08);
+            box-shadow: 0 2px 12px #f2b13440;
             border: 2px solid var(--accent);
-            background: #f6f6f6;
+            background: #2d2a5a;
             display: block;
         }
         .section-title {
@@ -117,6 +143,7 @@
             border-left: 5px solid var(--accent);
             padding-left: 12px;
             margin-bottom: 14px;
+            text-shadow: 0 1px 8px #4b3fd950;
         }
         .projects-list {
             display: flex;
@@ -129,12 +156,17 @@
             padding: 20px 26px;
             border-radius: 18px;
             min-width: 230px;
-            box-shadow: 0 2px 16px rgba(44,34,84,0.11);
+            box-shadow: 0 2px 22px rgba(44,34,84,0.11);
             margin-bottom: 6px;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.13s;
+        }
+        .project-card:hover {
+            transform: scale(1.04) rotate(-1.5deg);
+            box-shadow: 0 8px 32px #f2b13440;
         }
         .project-title {
             font-size: 1.15rem;
@@ -155,7 +187,7 @@
             transition: color 0.1s;
         }
         .project-link:hover {
-            color: #282828;
+            color: #2d2a5a;
         }
         .contact {
             margin-top: 40px;
@@ -176,16 +208,79 @@
         .contact a:hover {
             text-shadow: 0 2px 16px #f2b13440;
         }
+        .footer {
+            margin: 60px auto 0 auto;
+            text-align: center;
+            z-index: 5;
+            position: relative;
+        }
+        .footer-link {
+            display: inline-block;
+            font-family: 'Montserrat', sans-serif;
+            padding: 10px 30px;
+            background: linear-gradient(90deg, #4b3fd9 0%, #f2b134 100%);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.15rem;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px #4b3fd950;
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.15s, box-shadow 0.18s, transform 0.17s;
+            margin-bottom: 30px;
+        }
+        .footer-link:before {
+            content: "✨";
+            margin-right: 9px;
+            font-size: 1.2em;
+            vertical-align: middle;
+            animation: sparkle 2.4s infinite linear;
+        }
+        @keyframes sparkle {
+            0% { filter: brightness(1);}
+            80% { filter: brightness(1);}
+            85% { filter: brightness(2);}
+            90% { filter: brightness(1);}
+            100% { filter: brightness(1);}
+        }
+        .footer-link:hover, .footer-link:focus {
+            background: linear-gradient(90deg, #f2b134 0%, #4b3fd9 100%);
+            color: #fff;
+            box-shadow: 0 8px 32px #f2b13440, 0 0 0 4px #4b3fd960;
+            transform: scale(1.05) rotate(-1deg);
+            text-decoration: none;
+        }
+        .footer-link span {
+            background: none;
+            -webkit-background-clip: inherit;
+            -webkit-text-fill-color: inherit;
+        }
         @media (max-width: 650px) {
             .container { padding: 24px 8px;}
             .header { flex-direction: column; align-items: flex-start; }
             .profile-img { margin: 0 0 10px 0;}
             .dev-alias { font-size: 1.5rem;}
             .projects-list { flex-direction: column; }
+            .footer-link { font-size: 1rem; padding: 8px 14px;}
         }
     </style>
 </head>
 <body>
+    <audio id="bg-music" src="track.mp3" preload="auto"></audio>
+    <script>
+      // so once they click the music plays
+      let musicStarted = false;
+      document.addEventListener('click', function () {
+        if (!musicStarted) {
+          const audio = document.getElementById('bg-music');
+          audio.volume = 0.25;
+          audio.play();
+          musicStarted = true;
+        }
+      }, { once: true });
+    </script>
     <div class="container">
         <div class="header">
             <!-- IS THE DEV. lol js kidding -->
@@ -236,6 +331,10 @@
             <a href="https://github.com/justdev-chris" target="_blank">GitHub</a>
         </div>
     </div>
-  <div><p><a href="https://github.com/justdev-chris" target="_blank" rel="noopener noreferrer">site by justdev-chris :3</a></p></div>
+    <footer class="footer">
+      <a class="footer-link" href="https://github.com/justdev-chris" target="_blank" rel="noopener noreferrer">
+        <span>made by justdev-chris :3</span>
+      </a>
+    </footer>
 </body>
 </html>
