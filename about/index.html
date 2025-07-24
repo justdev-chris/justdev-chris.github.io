@@ -4,312 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cats go brrrr</title>
+    <!-- OG Meta Tags -->
+    <meta property="og:title" content="cats go brrrr – justdev-chris" />
+    <meta property="og:description" content="The chill dev spot for games, cats, and clickers. Made by justdev-chris!" />
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/185311413?v=4" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://catsdevs.online/about" />
+    <meta name="theme-color" content="#161624" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #ececff;
-            --accent: #f2b134;
-            --bg: #161624;
-            --card-bg: rgba(30, 30, 50, 0.94);
-            --text: #ececff;
-            --gradient: linear-gradient(90deg, #4b3fd9 0%, #f2b134 100%);
-            --border: #282850;
-            --shadow: 0 8px 32px 0 rgba(36, 32, 84, 0.44);
-        }
-        body {
-            background: var(--bg);
-            font-family: 'Roboto', Arial, sans-serif;
-            color: var(--text);
-            min-height: 100vh;
-            padding: 40px;
-            position: relative;
-            overflow-x: hidden;
-        }
-        .container {
-            max-width: 900px;
-            margin: 40px auto 40px auto;
-            background: var(--card-bg);
-            box-shadow: var(--shadow);
-            border-radius: 24px;
-            padding: 48px 36px;
-            position: relative;
-            overflow: hidden;
-            border: 1.5px solid var(--border);
-        }
-        .container::before,
-        .container::after {
-            content: '';
-            position: absolute;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .container::before {
-            top: -90px; right: -120px;
-            width: 300px; height: 300px;
-            background: var(--gradient);
-            border-radius: 50%;
-            opacity: 0.10;
-            filter: blur(4px);
-        }
-        .container::after {
-            left: -80px; bottom: -100px;
-            width: 200px; height: 200px;
-            background: radial-gradient(circle, #4b3fd9 0%, transparent 80%);
-            opacity: 0.1;
-            filter: blur(6px);
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            z-index: 2;
-            position: relative;
-        }
-        .profile-img {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 4px solid var(--accent);
-            box-shadow: 0 4px 22px rgba(44,34,84,0.18);
-            margin-bottom: 8px;
-            margin-right: 32px;
-            object-fit: cover;
-            background: #22223b;
-        }
-        .info-block {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 6px;
-        }
-        .dev-alias {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-right: 10px;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 24px #4b3fd980;
-            background: linear-gradient(90deg, #f2b134 0%, #ececff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .pronouns, .status {
-            font-size: 1.05rem;
-            background: var(--accent);
-            color: #2d2a5a;
-            border-radius: 12px;
-            padding: 2px 14px;
-            margin-right: 4px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            display: inline-block;
-            box-shadow: 0 2px 12px #f2b13420;
-        }
-        .status {
-            background: #4b3fd9;
-            color: #fff;
-        }
-        .bio {
-            font-size: 1.15rem;
-            margin: 10px 0 8px 0;
-            color: #b8bbea;
-            font-style: italic;
-            line-height: 1.6;
-            text-shadow: 0 1px 0 #32326480;
-        }
-        .gif-preview {
-            margin: 10px 0 0 0;
-            width: 70px;
-            height: 70px;
-            border-radius: 12px;
-            object-fit: cover;
-            box-shadow: 0 2px 12px #f2b13440;
-            border: 2px solid var(--accent);
-            background: #2d2a5a;
-            display: block;
-        }
-        .section-title {
-            margin-top: 38px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.3rem;
-            color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            border-left: 5px solid var(--accent);
-            padding-left: 12px;
-            margin-bottom: 14px;
-            text-shadow: 0 1px 8px #4b3fd950;
-        }
-        .projects-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 22px;
-        }
-        .project-card {
-            background: var(--gradient);
-            color: #fff;
-            padding: 20px 26px;
-            border-radius: 18px;
-            min-width: 230px;
-            box-shadow: 0 2px 22px rgba(44,34,84,0.11);
-            margin-bottom: 6px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.13s;
-        }
-        .project-card:hover {
-            transform: scale(1.04) rotate(-1.5deg);
-            box-shadow: 0 8px 32px #f2b13440;
-        }
-        .project-title {
-            font-size: 1.15rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .project-desc {
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-        .project-link {
-            color: #fff;
-            font-weight: 600;
-            text-decoration: underline;
-            margin-top: 6px;
-            transition: color 0.1s;
-        }
-        .project-link:hover {
-            color: #2d2a5a;
-        }
-        .contact {
-            margin-top: 40px;
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-        .contact a {
-            color: var(--primary);
-            font-size: 1.28rem;
-            text-decoration: none;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-            transition: text-shadow 0.1s;
-        }
-        .contact a:hover {
-            text-shadow: 0 2px 16px #f2b13440;
-        }
-        /* --- Music Player Styles --- */
-        .player-wrap {
-            margin: 28px auto 0 auto;
-            max-width: 410px;
-            background: rgba(36,32,84,0.35);
-            border-radius: 18px;
-            box-shadow: 0 2px 22px #4b3fd970;
-            padding: 20px 24px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            z-index: 10;
-            position: relative;
-        }
-        .player-btn {
-            background: var(--accent);
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            font-size: 1.5em;
-            color: #2d2a5a;
-            cursor: pointer;
-            box-shadow: 0 2px 12px #f2b13420;
-            transition: background 0.18s, transform 0.14s;
-        }
-        .player-btn:active {
-            background: #f2b134cc;
-            transform: scale(0.94);
-        }
-        .player-slider {
-            flex: 1;
-            accent-color: var(--accent);
-            margin: 0 12px;
-        }
-        .player-label {
-            font-size: 0.95em;
-            color: var(--accent);
-            margin-left: 12px;
-            opacity: 0.8;
-        }
-        /* Footer styles */
-        .footer {
-            margin: 60px auto 0 auto;
-            text-align: center;
-            z-index: 5;
-            position: relative;
-        }
-        .footer-link {
-            display: inline-block;
-            font-family: 'Montserrat', sans-serif;
-            padding: 10px 30px;
-            background: linear-gradient(90deg, #4b3fd9 0%, #f2b134 100%);
-            color: #fff;
-            font-weight: 700;
-            font-size: 1.15rem;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px #4b3fd950;
-            text-decoration: none;
-            letter-spacing: 0.04em;
-            position: relative;
-            overflow: hidden;
-            transition: background 0.15s, box-shadow 0.18s, transform 0.17s;
-            margin-bottom: 30px;
-        }
-        .footer-link:before {
-            content: "✨";
-            margin-right: 9px;
-            font-size: 1.2em;
-            vertical-align: middle;
-            animation: sparkle 2.4s infinite linear;
-        }
-        @keyframes sparkle {
-            0% { filter: brightness(1);}
-            80% { filter: brightness(1);}
-            85% { filter: brightness(2);}
-            90% { filter: brightness(1);}
-            100% { filter: brightness(1);}
-        }
-        .footer-link:hover, .footer-link:focus {
-            background: linear-gradient(90deg, #f2b134 0%, #4b3fd9 100%);
-            color: #fff;
-            box-shadow: 0 8px 32px #f2b13440, 0 0 0 4px #4b3fd960;
-            transform: scale(1.05) rotate(-1deg);
-            text-decoration: none;
-        }
-        .footer-link span {
-            background: none;
-            -webkit-background-clip: inherit;
-            -webkit-text-fill-color: inherit;
-        }
-        @media (max-width: 650px) {
-            .container { padding: 24px 8px;}
-            .header { flex-direction: column; align-items: flex-start; }
-            .profile-img { margin: 0 0 10px 0;}
-            .dev-alias { font-size: 1.5rem;}
-            .projects-list { flex-direction: column; }
-            .footer-link { font-size: 1rem; padding: 8px 14px;}
-            .player-wrap { max-width: 98vw; padding: 10px 8px; gap: 10px;}
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Nav bar, site map, and page info -->
+    <nav class="navbar">
+        <span class="site-logo">
+            <img src="https://avatars.githubusercontent.com/u/185311413?v=4" alt="site avatar" />
+            cats go brrrr
+        </span>
+        <div class="nav-links">
+            <a href="/" >Home</a>
+            <a href="/about" class="active">about</a>
+            <a href="/changelog">changelog</a>
+            <a href="https://catsdevs.online" target="_blank">UCC</a>
+            <a href="https://github.com/justdev-chris" target="_blank">GitHub</a>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn" id="darkModeBtn" title="Toggle dark/light mode">
+                <svg id="darkModeIcon" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                    <circle cx="11" cy="11" r="9" stroke="#2d2a5a" stroke-width="2"/>
+                    <path id="moonPath" d="M15 11a4 4 0 1 1-8 0c0-2.2 1.8-4 4-4a4 4 0 0 1 4 4z" fill="#f2b134"/>
+                </svg>
+                dark
+            </button>
+        </div>
+    </nav>
     <audio id="bg-music" src="track.mp3" preload="auto"></audio>
     <div class="container">
         <div class="header">
-            <!-- IS THE DEV. lol js kidding -->
             <img class="profile-img" src="https://avatars.githubusercontent.com/u/185311413?v=4" alt="justdev-chris avatar">
             <div>
                 <div class="info-block">
@@ -318,10 +49,9 @@
                     <span class="status">🌟 Making things happen</span>
                 </div>
                 <div class="bio">
-                    Coder & game creator. I build cool projects, like games and web stuff.<br>
-                    always learning, always making...
+                    Coder & game creator. I love building cool projects, especially games and web stuff.<br>
+                    Always learning, always making!
                 </div>
-                <!-- spinny silly cat :3 -->
                 <img class="gif-preview" src="https://c.tenor.com/3DzhsHs_8G8AAAAC/tenor.gif" alt="profile gif">
             </div>
         </div>
@@ -357,57 +87,30 @@
             <a href="https://github.com/justdev-chris" target="_blank">GitHub</a>
         </div>
 
-        <!-- music player (totally not a boombox, promise) -->
+        <!-- Music Player -->
         <div class="player-wrap" id="player-wrap">
             <button class="player-btn" id="player-play" title="Play/Pause" aria-label="Play/Pause">▶️</button>
             <input class="player-slider" id="player-volume" type="range" min="0" max="1" step="0.01" value="0.25" title="Volume">
             <span class="player-label" id="player-status">volume: 25%</span>
         </div>
+
+        <!-- Changelog Section -->
+        <div class="changelog">
+            <div class="changelog-title">changelog & updates</div>
+            <ul class="changelog-list">
+                <li>2025-07-24 – finally added a dark/light mode button, so you can vibe however you want 🎨</li>
+                <li>2025-07-23 – dropped a new music player, now you can jam while scrolling (pause if you need a break 😺)</li>
+                <li>2025-07-21 – made the nav bar so you can actually find stuff... wow, organization!</li>
+                <li>2025-07-20 – animated gradients and better footer, because why not?</li>
+                <li>2025-07-17 – site went live! if you see bugs, just ping me on github lol</li>
+            </ul>
+        </div>
     </div>
     <footer class="footer">
       <a class="footer-link" href="https://github.com/justdev-chris" target="_blank" rel="noopener noreferrer">
-        <span>made by justdev-chris :3 (if you see bugs, just tell me &lt;3)</span>
+        <span>made by justdev-chris :3 (bugs? js lmk)</span>
       </a>
     </footer>
-    <script>
-      // only play music once user interacts (browser requirement)
-      let musicStarted = false;
-      const audio = document.getElementById('bg-music');
-      const playBtn = document.getElementById('player-play');
-      const volSlider = document.getElementById('player-volume');
-      const statusLabel = document.getElementById('player-status');
-
-      // try to play on click anywhere (first time only)
-      document.addEventListener('click', function () {
-        if (!musicStarted) {
-          audio.volume = volSlider.value;
-          audio.play();
-          playBtn.textContent = "⏸️";
-          statusLabel.textContent = `volume: ${Math.round(audio.volume*100)}%`;
-          musicStarted = true;
-        }
-      }, { once: true });
-
-      // controls for the music
-      playBtn.addEventListener('click', function (e) {
-        if (audio.paused) {
-          audio.play();
-          playBtn.textContent = "⏸️";
-        } else {
-          audio.pause();
-          playBtn.textContent = "▶️";
-        }
-      });
-
-      volSlider.addEventListener('input', function () {
-        audio.volume = volSlider.value;
-        statusLabel.textContent = `volume: ${Math.round(audio.volume*100)}%`;
-      });
-
-      // ui updater logic thing
-      audio.addEventListener('ended', function() {
-        playBtn.textContent = "▶️";
-      });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
