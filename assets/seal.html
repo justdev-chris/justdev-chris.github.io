@@ -1,1 +1,12 @@
-
+<div>
+  <img class="gif-preview" src="https://c.tenor.com/OBbiRLgw-38AAAAd/tenor.gif" alt="gif">
+</div>
+<script>
+  const audio = new Audio('spinningseal.mp3');
+  audio.loop = true;
+  audio.autoplay = true;
+  audio.volume = 0.5; // should be a good volume tbh
+  audio.play().catch(() => {
+    console.warn('autoplay got blocked lol... u might need user interaction or smth')
+  });
+</script>
