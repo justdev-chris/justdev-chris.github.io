@@ -1,12 +1,58 @@
-<div>
-  <img class="gif-preview" src="https://c.tenor.com/OBbiRLgw-38AAAAd/tenor.gif" alt="gif">
-</div>
-<script>
-  const audio = new Audio('spinningseal.mp3');
-  audio.loop = true;
-  audio.autoplay = true;
-  audio.volume = 0.5; // should be a good volume tbh
-  audio.play().catch(() => {
-    console.warn('autoplay got blocked lol... u might need user interaction or smth')
-  });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>cat + spinning seal = ?</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #seal {
+      width: 300px;
+      animation: spin 4s linear infinite;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    #overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: sans-serif;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div id="overlay">Click anywhere... trust. </div>
+  <img id="seal" src="https://c.tenor.com/OBbiRLgw-38AAAAd/tenor.gif" alt="Spinning Seal" />
+  <script>
+    const audio = new Audio("spinningseal.mp3");
+    audio.loop = true;
+    audio.volume = 0.5;
+
+    const overlay = document.getElementById("overlay");
+    overlay.addEventListener("click", () => {
+      audio.play().then(() => {
+        overlay.style.display = "none";
+      }).catch((err) => {
+        alert("Couldn’t play audio: " + err);
+      });
+    });
+  </script>
+</body>
+</html>
+
