@@ -1008,3 +1008,18 @@
   <h1 class="rotating-text" style="margin-bottom: 4px;">Crazy Cattle 3d</h1><br>
 </span>
 </div>
+
+<div id="gameFrameContainer"></div>
+
+<script>
+  function launchiframe(path) {
+    document.getElementById("gameFrameContainer").innerHTML = `
+      <button onclick="closeiframe()">Close</button>
+      <iframe src="${path}" width="960" height="600" style="border:none;" allowfullscreen></iframe>
+    `;
+  }
+
+  function closeiframe() {
+    document.getElementById("gameFrameContainer").innerHTML = '';
+  }
+</script>
