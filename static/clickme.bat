@@ -1,22 +1,22 @@
 @echo off
-title cat virus
-mode 1000
-color 0D
+color 1F
+title 🐾 CAT VIRUS LOCKDOWN MODE 🐾
+mode con: cols=160 lines=900
 
-:: Disable quick edit to stop her from pausing it accidentally
-reg add "HKCU\Console" /v QuickEdit /t REG_DWORD /d 0 /f >nul
+:: Auto fullscreen using powershell trick (ALT+ENTER via API)
+powershell -command "$sig = '[DllImport(\"user32.dll\")]public static extern bool keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);'; Add-Type -MemberDefinition $sig -Name 'Keyboard' -Namespace 'Win32'; [Win32.Keyboard]::keybd_event(0xA4,0,0,0); [Win32.Keyboard]::keybd_event(13,0,0,0); [Win32.Keyboard]::keybd_event(13,0,2,0); [Win32.Keyboard]::keybd_event(0xA4,0,2,0);"
 
-:: Hide the taskbar & go fullscreen
-powershell -command "$null = Add-Type -MemberDefinition '[DllImport(\"user32.dll\")] public static extern int ShowWindow(int hWnd, int nCmdShow);' -Name 'WinAPI' -Namespace 'Win32'; $hwnd = (Get-Process -Id $pid).MainWindowHandle; [Win32.WinAPI]::ShowWindow($hwnd, 3)"
-
-:: Loop forever
-:loop
+:: Begin infinite snuggle loop
+:meowloop
 cls
-echo o a you've been caught by the CAT VIRUS 
 echo.
-echo now your system is 100% floofified with CATS... that meow meow meow
-echo press Alt + F4 if you think u can escape...
+echo 💻 CAT VIRUS ACTIVE 💻
 echo.
-start https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif
-timeout /t 5 >nul
-goto loop
+echo 🐾 ur system is now owned by cat.exe
+echo cats at 900%...
+echo.
+echo press ALT + F4 if u hate cats or want to escape
+echo (but why would u the cats... 
+echo.
+timeout /t 2 >nul
+goto meowloop
