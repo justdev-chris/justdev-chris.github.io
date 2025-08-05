@@ -1,4 +1,4 @@
-<Files "idk">
+<Files "game3.html">
     AuthType Basic
     AuthName "restricted area"
     AuthUserFile /assets/.htpasswd
