@@ -1,14 +1,9 @@
-RewriteEngine On
-
-<DirectoryMatch "^.">
-  Order allow,deny
-  Allow from all
-</DirectoryMatch>
-
-RewriteCond %{REQUEST_URI} "^/\.well-known/"
-RewriteRule .* - [L]
-
-RewriteRule ^\.well-known/discord$ /wellknown/discord [L]
+<Files "idk">
+    AuthType Basic
+    AuthName "restricted area"
+    AuthUserFile /assets/.htpasswd
+    Require valid-user
+</Files>
 
 AddType text/css .css
 AddType application/javascript .js
