@@ -1,4 +1,12 @@
-// javascript for stupid password protected sites since yall tryna spy on me lol
-const dastupidsitethatspasswordprotected = window.location.pathname;
-window.location.href = '/login.html?redirect=${encodeURIComponent(dastupidsitethatspasswordprotected)}';
+const panelpasswdidk123lol = "catboy:Bp5tkbgCj9iVtXuAU6Zb"; // noo dont even think about it
+
+const input = prompt("restricted page... enter password to access this page:");
+
+if (input === panelpasswdidk123lol) {
+  alert("access granted");
+} else {
+  alert("wrong password... redirecting...");
+  window.location.href = "/";
+}
+
 
