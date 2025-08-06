@@ -1,13 +1,8 @@
-<Files "game3.html">
-    AuthType Basic
-    AuthName "restricted area"
-    AuthUserFile /assets/.htpasswd
-    Require valid-user
-</Files>
 
 AddType text/css .css
 AddType application/javascript .js
 
 
-ErrorDocument 404/405.html
+ErrorDocument 404/404.html
 
+// this is for infinity free pages once catsdevs.online expires
