@@ -33,7 +33,7 @@
 
     function enterChat() {
       username = document.getElementById('username').value.trim() || "Anonymous";
-      socket = io("https://"); // replace with your backend URL
+      socket = io("https://gfk9jz-3000.csb.app/"); // replace with your backend URL
       socket.emit('set username', username);
 
       document.getElementById('home').style.display = 'none';
