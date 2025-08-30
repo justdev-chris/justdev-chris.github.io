@@ -1,0 +1,20 @@
+{
+  "name": "Ultimate Cat Clicker",
+  "short_name": "UCC",
+  "start_url": "/Ultimate-Cat-Clicker/UCC/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff99cc",
+  "icons": [
+    {
+      "src": "/Ultimate-Cat-Clicker/UCC/cat.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/Ultimate-Cat-Clicker/UCC/cat.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
