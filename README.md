@@ -4,7 +4,9 @@
     <p>Ultimate Cat Clicker is a clicker game about cats where you adventure your way through clicks.</p>
 </div>
 
+<div align="center">
 ![inpreview](https://raw.githubusercontent.com/justdev-chris/justdev-chris.github.io/refs/heads/main/uccbgload.png)
+</div>
 
 > [!IMPORTANT]
 > If you fork this project, consider giving it a star in the original repository!
