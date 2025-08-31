@@ -5,7 +5,7 @@
 </div>
 
 <div align="center">
-![inpreview](https://raw.githubusercontent.com/justdev-chris/justdev-chris.github.io/refs/heads/main/uccbgload.png)
+<img src="https://raw.githubusercontent.com/justdev-chris/justdev-chris.github.io/refs/heads/main/uccbgload.png">
 </div>
 
 > [!IMPORTANT]
