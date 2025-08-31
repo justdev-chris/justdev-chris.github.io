@@ -1,4 +1,3 @@
-# [catsdevs](https://catsdevs.online/)
 <div align="center">
     <img src="https://raw.githubusercontent.com/justdev-chris/justdev-chris.github.io/refs/heads/main/flamingtext_com-38981848-removebg-preview.png">
     <p>Ultimate Cat Clicker, a simple clicker game.<p>
