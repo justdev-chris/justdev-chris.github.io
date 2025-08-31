@@ -13,7 +13,7 @@ const io = socketIo(server, {
   }
 });
 
-// Serve static files
+// serve static files
 app.use(express.static('.'));
 
 // Game state
