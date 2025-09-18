@@ -468,7 +468,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
 async function updateVisits() {
     try {
-        const res = await fetch('https://visa20.ct.ws/counter.php');
+        const res = await fetch('https://visa20.ct.ws/visits.php');
         const data = await res.json();
         const box = document.getElementById('visitCounter');
         box.innerHTML = `
@@ -581,6 +581,7 @@ setInterval(updateVisits, 10000);
   <script>
 </body>
 </html>
+
 
 
 
