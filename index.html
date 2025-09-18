@@ -448,53 +448,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span>made by justdev-chris :3</span>
     </a>
   </footer>
-<div id="visitCounter" style="
-    position: fixed;
-    top: 20px;       /* distance from top */
-    right: 20px;     /* distance from right */
-    background:#333;
-    color:white;
-    padding:15px;
-    width:160px;
-    border-radius:10px;
-    font-family:sans-serif;
-    text-align:center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    cursor:pointer;
-    z-index: 9999;   /* stays on top of everything */
+<div id="visit-counter" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: default;
+  z-index: 9999;
 ">
-  Loading visits...
+  Loading stats...
 </div>
+
 <script>
 async function updateVisits() {
-    try {
-        const res = await fetch('http://visa20.ct.ws/visits.php');
-        const data = await res.json();
-        const box = document.getElementById('visitCounter');
-        box.innerHTML = `
-            Yesterday: ${data.yesterday}<br>
-            Today: ${data.today}<br>
-            Total: ${data.total}
-        `;
-    } catch(e){
-        console.error('Failed to fetch visits:', e);
-    }
+  try {
+    const res = await fetch('https://stat-counter.vercel.app/api/visits');
+    const data = await res.json();
+    const counter = document.getElementById('visit-counter');
+    counter.innerHTML = `
+      <strong>Visits:</strong><br>
+      Yesterday: ${data.yesterday}<br>
+      Today: ${data.today}<br>
+      Total: ${data.total}
+    `;
+  } catch (e) {
+    console.error('Failed to fetch visits:', e);
+  }
 }
-updateVisits();
 
 // Hover effect
-const box = document.getElementById('visitCounter');
-box.addEventListener('mouseover', () => {
-    box.style.transform = 'scale(1.05)';
-    box.style.boxShadow = '0 0 15px #555';
+const counter = document.getElementById('visit-counter');
+counter.addEventListener('mouseenter', () => {
+  counter.style.transform = 'scale(1.05)';
+  counter.style.boxShadow = '0 6px 12px rgba(0,0,0,0.4)';
 });
-box.addEventListener('mouseout', () => {
-    box.style.transform = 'scale(1)';
-    box.style.boxShadow = 'none';
+counter.addEventListener('mouseleave', () => {
+  counter.style.transform = 'scale(1)';
+  counter.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
 });
 
-// Optional: auto-refresh every 10 seconds
-setInterval(updateVisits, 10000);
+// Update immediately
+updateVisits();
 </script>
   <script>
     // sum animation logic
