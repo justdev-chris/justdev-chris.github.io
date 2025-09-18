@@ -448,54 +448,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span>made by justdev-chris :3</span>
     </a>
   </footer>
-<div id="visit-counter" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #333;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: default;
-  z-index: 9999;
-">
-  Loading stats...
-</div>
+<iframe 
+  src="https://stat-counter.vercel.app/api/stats" 
+  style="width: 180px; height: 120px; border: none; overflow: hidden;">
+</iframe>
 
 <script>
-async function updateVisits() {
-  try {
-    const res = await fetch('https://stat-counter.vercel.app/api/visits');
-    const data = await res.json();
-    const counter = document.getElementById('visit-counter');
-    counter.innerHTML = `
-      <strong>Visits:</strong><br>
-      Yesterday: ${data.yesterday}<br>
-      Today: ${data.today}<br>
-      Total: ${data.total}
-    `;
-  } catch (e) {
-    console.error('Failed to fetch visits:', e);
-  }
-}
-
-// Hover effect
-const counter = document.getElementById('visit-counter');
-counter.addEventListener('mouseenter', () => {
-  counter.style.transform = 'scale(1.05)';
-  counter.style.boxShadow = '0 6px 12px rgba(0,0,0,0.4)';
-});
-counter.addEventListener('mouseleave', () => {
-  counter.style.transform = 'scale(1)';
-  counter.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
-});
-
-// Update immediately
-updateVisits();
+  // Send a POST request to increment today & total automatically
+  fetch('https://stat-counter.vercel.app/api/stats', { method: 'POST' });
 </script>
   <script>
     // sum animation logic
