@@ -28,8 +28,7 @@
 > You **can** deploy to static web hosts, including Netlify, Cloudflare Pages, and GitHub Pages.
 > Ultimate Cat Clicker is static.
 
-[![Remix on Glitch](https://binbashbanana.github.io/deploy-buttons/buttons/remade/glitch.svg)](https://glitch.com/edit/#!/import/github/justdev-chris/Ultimate-Cat-Clicker)
-[![Run on Replit](https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg)](https://github.com/justdev-chris/Ultimate-Cat-Clicker)
+
 [![Deploy with Vercel](https://binbashbanana.github.io/deploy-buttons/buttons/remade/vercel.svg)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fjustdev-chris%2FUltimate-Cat-Clicker)
 [![Deploy to Render](https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg)](https://render.com/deploy?repo=https://github.com/justdev-chris/Ultimate-Cat-Clicker)
 [![Deploy with Netlify](https://binbashbanana.github.io/deploy-buttons/buttons/remade/netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/justdev-chris/Ultimate-Cat-Clicker)
