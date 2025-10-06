@@ -5,142 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ultimate Cat Clicker</title>
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body, html { width:100%; height:100%; font-family: Arial, sans-serif; }
+  /* Basic Reset */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
 
-  /* Background */
-  body {
-    background-image: url('loadingbg.png');
-    background-size: contain; /* adjust: contain/cover */
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: #222;
+  /* Splash Screen */
+  #splash {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #1e1e2f;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1s ease;
   }
+  #splash img { width: 200px; margin-bottom: 20px; }
+  #splash p { font-size: 1.2em; letter-spacing: 1px; }
 
-  /* Navbar */
-  header nav {
-    display: flex;
-    gap: 20px;
-    padding: 10px 20px;
-    background-color: rgba(0,0,0,0.5);
-  }
-  header nav a { color: white; text-decoration: none; font-weight: bold; }
-
-  /* Footer */
-  footer { text-align: center; padding: 10px; background-color: rgba(0,0,0,0.5); color: white; }
-
-  /* Progress bar */
-  #progress-wrapper {
-    width: 60%;
-    margin: 0 auto;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-  #progress-text {
-    color: white;
-    margin-bottom: 5px;
+  /* Loading Screen */
+  #loading {
+    display: none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background: url('https://catsdevs.online/loadingbg.png') center/cover no-repeat;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 150px;
+    transition: opacity 1s ease;
   }
   #progress-container {
-    width: 100%;
-    height: 25px;
+    width: 70%;
+    max-width: 500px;
+    height: 30px;
     background: rgba(255,255,255,0.2);
-    border-radius: 12px;
+    border-radius: 15px;
     overflow: hidden;
+    margin-bottom: 20px;
   }
   #progress-bar {
+    width: 0;
     height: 100%;
-    width: 0%;
-    background-color: #00ffcc;
-    border-radius: 12px;
-    transition: width 0.3s;
+    background: #ff6f61;
+    transition: width 0.2s ease;
   }
-
-  /* Play button */
   #play-button {
     display: none;
-    margin: 20px auto;
-    padding: 15px 30px;
+    padding: 12px 25px;
     font-size: 1.2em;
-    font-weight: bold;
+    background: #ff6f61;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  #play-button:hover { transform: scale(1.05); }
+
+  /* Nav Bar */
+  nav {
+    position: fixed;
+    top:0; left:0; width:100%; height:60px;
+    background: rgba(0,0,0,0.8);
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 0 20px; color:#fff; z-index: 1000;
+  }
+  nav .logo { font-size: 1.5em; font-weight:bold; }
+  nav .links a { margin-left: 15px; color:#fff; text-decoration:none; }
+  nav .links a:hover { text-decoration:underline; }
+
+  /* Game iframe */
+  #game-frame {
+    display:none;
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
     border:none;
-    border-radius:8px;
-    background-color:#00ffcc;
-    color:#222;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <nav>
-    <a href="#">home</a>
-    <a href="https://github.com/justdev-chris">github</a>
-    <a href="/GMFIXV2/">games</a>
-    <a href="/assets/seal">spinning seal</a>
-  </nav>
-</header>
+<!-- Splash / Dev Prods Screen -->
+<div id="splash">
+  <img src="https://catsdevs.online/loadingbg.png" alt="UCC Logo">
+  <p>Made with justdev-chris | Built in HTML5</p>
+</div>
 
-<div id="progress-wrapper">
-  <div id="progress-text">Loading: 0%</div>
+<!-- Loading Screen -->
+<div id="loading" class="flex-center">
+  <nav>
+    <div class="logo">Ultimate Cat Clicker</div>
+    <div class="links">
+      <a href="#">home</a>
+      <a href="https://github.com/justdev/chris">github</a>
+      <a href="/GMFIXV2/">games</a>
+      <a href="/assets/seal">spinning seal</a>
+    </div>
+  </nav>
   <div id="progress-container">
     <div id="progress-bar"></div>
   </div>
+  <button id="play-button">Play Game</button>
 </div>
 
-<button id="play-button" onclick="startGame()">Play</button>
-
-<footer>
-  <p>© 2025 Ultimate Cat Clicker</p>
-</footer>
+<!-- Game iframe -->
+<iframe id="game-frame" src="game.html"></iframe>
 
 <script>
-const jsFiles = [
-  "js/game/main.js",
-  "js/game/achievements.js",
-  "js/game/shop.js",
-  "js/adventure/adventure.js",
-  "js/ui/display.js",
-  "js/ui/customization.js",
-  "js/minigames/fishing.js",
-  "js/minigames/memory.js"
-];
+  // Splash -> Loading
+  const splash = document.getElementById('splash');
+  const loading = document.getElementById('loading');
+  const playButton = document.getElementById('play-button');
+  const progressBar = document.getElementById('progress-bar');
+  const gameFrame = document.getElementById('game-frame');
 
-let loaded = 0;
-const total = jsFiles.length;
-const progressBar = document.getElementById('progress-bar');
-const progressText = document.getElementById('progress-text');
+  // JS files to load
+  const jsFiles = [
+    "js/game/main.js",
+    "js/game/achievements.js",
+    "js/game/shop.js",
+    "js/adventure/adventure.js",
+    "js/ui/display.js",
+    "js/ui/customization.js",
+    "js/minigames/fishing.js",
+    "js/minigames/memory.js"
+  ];
 
-function updateProgress() {
-  const percent = Math.round((loaded / total) * 100);
-  progressBar.style.width = percent + '%';
-  progressText.textContent = `Loading: ${percent}%`;
-  if(loaded === total) document.getElementById('play-button').style.display = 'block';
-}
+  function loadScripts(files, callback) {
+    let loaded = 0;
+    files.forEach(file => {
+      const script = document.createElement('script');
+      script.src = file;
+      script.onload = () => {
+        loaded++;
+        let percent = Math.floor((loaded / files.length) * 100);
+        progressBar.style.width = percent + '%';
+        if(loaded === files.length) callback();
+      };
+      document.body.appendChild(script);
+    });
+  }
 
-jsFiles.forEach(src => {
-  const s = document.createElement('script');
-  s.src = src;
-  s.onload = () => { loaded++; updateProgress(); };
-  s.onerror = () => { console.warn(`Failed to load ${src}`); loaded++; updateProgress(); };
-  document.body.appendChild(s);
-});
+  setTimeout(() => {
+    splash.style.opacity = 0;
+    setTimeout(() => {
+      splash.style.display = 'none';
+      loading.style.display = 'flex';
+      // Load game JS
+      loadScripts(jsFiles, () => {
+        playButton.style.display = 'block';
+      });
+    }, 1000);
+  }, 3000); // 3 sec splash
 
-function startGame() {
-  const iframe = document.createElement('iframe');
-  iframe.src = 'game.html';
-  iframe.style.position = 'fixed';
-  iframe.style.top = 0;
-  iframe.style.left = 0;
-  iframe.style.width = '100%';
-  iframe.style.height = '100%';
-  iframe.style.border = 'none';
-  document.body.innerHTML = '';
-  document.body.appendChild(iframe);
-}
+  // Play button opens iframe
+  playButton.addEventListener('click', () => {
+    loading.style.display = 'none';
+    gameFrame.style.display = 'block';
+  });
 </script>
 
 </body>
