@@ -27,7 +27,6 @@
   nav {width:80px; background:rgba(0,0,0,0.7); display:flex; flex-direction:column; align-items:center; padding-top:20px;}
   nav a {color:white; margin:15px 0; font-size:24px; text-decoration:none;}
   #content {flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; position:relative;}
-  #content iframe {width:80%; height:60%; border:none; margin-top:20px;}
   
   /* Floating emojis */
   .emoji {position:absolute; font-size:20px; animation:float 5s linear infinite;}
@@ -38,7 +37,7 @@
 
 <!-- Splash Screen -->
 <div id="splash">
-  <img src="https://avatars.githubusercontent.com/u/185311413?s=400&u=0008ad1eb488786fcd3b717948277a11c921b9f4&v=4" alt="Dev PFP">
+  <img src="assets/pfp.png" alt="Dev PFP">
   <p>Made by justdev-chris | Built in HTML5</p>
 </div>
 
@@ -61,7 +60,6 @@
   </nav>
   <div id="content">
     <button id="play-btn">Play 🐾</button>
-    <iframe id="game-frame" src="" allowfullscreen></iframe>
   </div>
 </div>
 
@@ -97,12 +95,11 @@ function showHome(){
     alert('You are playing UCC on a different website. This may be a modified version of UCC. For more info, visit https://catsdevs.online/modified. You can continue playing but it may not be official.');
   }
 
-  // Play button
+  // Play button placeholder
   const playBtn = document.getElementById('play-btn');
-  const gameFrame = document.getElementById('game-frame');
   const audio = new Audio('about/track2.mp3');
   playBtn.onclick = ()=>{
-    gameFrame.src='game.html';
+    alert("Play button clicked! Game iframe currently disabled.");
     audio.play();
   };
 }
