@@ -5,168 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ultimate Cat Clicker</title>
 <style>
-  /* Basic Reset */
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-
-  /* Splash Screen */
+  body, html { margin:0; padding:0; font-family: sans-serif; overflow:hidden; }
+  /* Splash / Dev Prods */
   #splash {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: #1e1e2f;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    z-index: 9999;
-    opacity: 1;
-    transition: opacity 1s ease;
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    background:#111; color:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    animation: fadeOut 1s ease forwards; animation-delay:5s;
   }
-  #splash img { width: 200px; margin-bottom: 20px; }
-  #splash p { font-size: 1.2em; letter-spacing: 1px; }
+  #splash img { width:120px; height:120px; border-radius:50%; margin-bottom:20px; animation: slideDown 2s ease; }
+  #splash p { margin:5px; font-size:1.2em; }
+  @keyframes slideDown { from {transform: translateY(100px); opacity:0;} to {transform:translateY(0); opacity:1;} }
+  @keyframes fadeOut { to {opacity:0; visibility:hidden;} }
 
   /* Loading Screen */
-  #loading {
-    display: none;
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    background: url('https://catsdevs.online/loadingbg.png') center/cover no-repeat;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 150px;
-    transition: opacity 1s ease;
-  }
-  #progress-container {
-    width: 70%;
-    max-width: 500px;
-    height: 30px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 20px;
-  }
-  #progress-bar {
-    width: 0;
-    height: 100%;
-    background: #ff6f61;
-    transition: width 0.2s ease;
-  }
-  #play-button {
-    display: none;
-    padding: 12px 25px;
-    font-size: 1.2em;
-    background: #ff6f61;
-    color: #fff;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  }
-  #play-button:hover { transform: scale(1.05); }
+  #loading { position: fixed; top:0; left:0; width:100%; height:100%; background:#222; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  #loadingBar { width:60%; height:30px; background:#555; border-radius:15px; overflow:hidden; position:relative; margin-top:20px; }
+  #barFill { width:0%; height:100%; background:#4caf50; display:flex; align-items:center; justify-content:flex-start; position:relative; transition:width 0.2s; }
+  #catEmoji { position:absolute; left:0; top:-25px; font-size:25px; }
 
-  /* Nav Bar */
-  nav {
-    position: fixed;
-    top:0; left:0; width:100%; height:60px;
-    background: rgba(0,0,0,0.8);
-    display:flex; justify-content:space-between; align-items:center;
-    padding: 0 20px; color:#fff; z-index: 1000;
-  }
-  nav .logo { font-size: 1.5em; font-weight:bold; }
-  nav .links a { margin-left: 15px; color:#fff; text-decoration:none; }
-  nav .links a:hover { text-decoration:underline; }
+  /* Home */
+  #home { display:none; width:100%; height:100%; background:url('https://images.unsplash.com/photo-1604147706285-d3bfcac55bbf?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat; position:relative; }
+  #nav { position:absolute; left:0; top:0; width:70px; height:100%; background:rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; padding-top:20px; }
+  #nav a { color:#fff; text-decoration:none; margin:20px 0; font-size:24px; display:flex; flex-direction:column; align-items:center; }
+  #nav a span { font-size:14px; margin-top:5px; }
+  #content { margin-left:70px; width:calc(100% - 70px); height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; }
 
-  /* Game iframe */
-  #game-frame {
-    display:none;
-    position: fixed;
-    top:0; left:0; width:100%; height:100%;
-    border:none;
-  }
+  /* Floating cats/fish */
+  .floatEmoji { position:absolute; font-size:30px; animation: floatAnim linear infinite; }
+  @keyframes floatAnim { 0% {transform: translateY(100vh);} 100% {transform: translateY(-100px);} }
+
+  /* Play Button */
+  #playBtn { padding:10px 20px; font-size:1.5em; cursor:pointer; margin-top:20px; }
+
+  iframe { width:100%; height:70%; border:none; margin-top:20px; }
+
 </style>
 </head>
-<body>
+<body onload="initUCC()">
 
-<!-- Splash / Dev Prods Screen -->
+<!-- Splash / Dev Prods -->
 <div id="splash">
-  <img src="https://avatars.githubusercontent.com/u/185311413?v=4" alt="UCC Logo">
-  <p>Made with justdev-chris | Built in HTML5</p>
+  <img src="assets/yourpfp.png" alt="Dev PFP">
+  <p>justdev-chris</p>
+  <p>Built in HTML5</p>
 </div>
 
 <!-- Loading Screen -->
-<div id="loading" class="flex-center">
-  <nav>
-    <div class="logo">Ultimate Cat Clicker</div>
-    <div class="links">
-      <a href="#">home</a>
-      <a href="https://github.com/justdev/chris">github</a>
-      <a href="/GMFIXV2/">games</a>
-      <a href="/assets/seal">spinning seal</a>
-    </div>
-  </nav>
-  <div id="progress-container">
-    <div id="progress-bar"></div>
+<div id="loading">
+  <div>Loading...</div>
+  <div id="loadingBar">
+    <div id="barFill"><span id="catEmoji">🐱</span></div>
   </div>
-  <button id="play-button">Play Game</button>
 </div>
 
-<!-- Game iframe -->
-<iframe id="game-frame" src="game.html"></iframe>
+<!-- Home / Game -->
+<div id="home">
+  <div id="nav">
+    <a href="#"><i>🏠</i><span>Home</span></a>
+    <a href="https://github.com/justdev-chris"><i>💻</i><span>GitHub</span></a>
+    <a href="/GMFIXV2/"><i>🎮</i><span>Games</span></a>
+    <a href="assets/seal.html"><i>🦭</i><span>Seal</span></a>
+  </div>
+  <div id="content">
+    <button id="playBtn">Play</button>
+    <iframe id="gameFrame" src="game.html"></iframe>
+  </div>
+</div>
+
+<audio id="bgMusic" src="assets/music.mp3" loop></audio>
 
 <script>
-  // Splash -> Loading
-  const splash = document.getElementById('splash');
-  const loading = document.getElementById('loading');
-  const playButton = document.getElementById('play-button');
-  const progressBar = document.getElementById('progress-bar');
-  const gameFrame = document.getElementById('game-frame');
-
-  // JS files to load
-  const jsFiles = [
-    "js/game/main.js",
-    "js/game/achievements.js",
-    "js/game/shop.js",
-    "js/adventure/adventure.js",
-    "js/ui/display.js",
-    "js/ui/customization.js",
-    "js/minigames/fishing.js",
-    "js/minigames/memory.js"
-  ];
-
-  function loadScripts(files, callback) {
-    let loaded = 0;
-    files.forEach(file => {
-      const script = document.createElement('script');
-      script.src = file;
-      script.onload = () => {
-        loaded++;
-        let percent = Math.floor((loaded / files.length) * 100);
-        progressBar.style.width = percent + '%';
-        if(loaded === files.length) callback();
-      };
-      document.body.appendChild(script);
-    });
+function initUCC() {
+  // Host check
+  if (!location.href.includes("catsdevs.online")) {
+    alert("You are playing UCC on a different website. This may be a modified version. For official UCC, visit https://catsdevs.online/modified");
   }
 
-  setTimeout(() => {
-    splash.style.opacity = 0;
-    setTimeout(() => {
-      splash.style.display = 'none';
-      loading.style.display = 'flex';
-      // Load game JS
-      loadScripts(jsFiles, () => {
-        playButton.style.display = 'block';
-      });
-    }, 1000);
-  }, 3000); // 3 sec splash
+  // Splash fade
+  setTimeout(()=>{ document.getElementById('splash').style.display='none'; }, 5000);
 
-  // Play button opens iframe
-  playButton.addEventListener('click', () => {
-    loading.style.display = 'none';
-    gameFrame.style.display = 'block';
+  // Loading bar
+  let progress = 0;
+  const bar = document.getElementById('barFill');
+  const cat = document.getElementById('catEmoji');
+  const loadingInterval = setInterval(()=>{
+    progress += Math.random()*10; 
+    if(progress>=100) progress=100;
+    bar.style.width = progress + '%';
+    cat.style.left = `calc(${progress}% - 15px)`;
+    if(progress>=100){ clearInterval(loadingInterval); showHome(); }
+  }, 200);
+
+  function showHome() {
+    document.getElementById('loading').style.display='none';
+    document.getElementById('home').style.display='flex';
+  }
+
+  // Play button triggers music
+  document.getElementById('playBtn').addEventListener('click', ()=>{
+    document.getElementById('bgMusic').play();
   });
+
+  // Add floating cats/fish
+  const emojis = ['🐱','🐟'];
+  for(let i=0;i<20;i++){
+    let span = document.createElement('span');
+    span.className='floatEmoji';
+    span.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    span.style.left = Math.random()*90+'vw';
+    span.style.animationDuration = (5+Math.random()*5)+'s';
+    document.getElementById('home').appendChild(span);
+  }
+}
 </script>
 
 </body>
