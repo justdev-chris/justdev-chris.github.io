@@ -134,6 +134,14 @@
       🎮 Mini Game Wins: <span id="minigameWins">0</span>
     </div>
 
+    <div class="panel">
+    <h3>🏆 Leaderboard</h3>
+    <div id="leaderboard">
+        <div>Loading leaderboard...</div>
+    </div>
+    <button onclick="updateLeaderboard()">Refresh</button>
+</div>
+    
     <!-- adventure-->
     <div style="text-align: center; margin: 20px;">
       <button onclick="startAdventure()" class="nav-btn" style="font-size: 1.2em; padding: 15px 30px; background: linear-gradient(45deg, #ff6b6b, #4ecdc4);">
@@ -373,6 +381,31 @@ function confirmReset() {
   document.getElementById('resetConfirm').style.display = 'none';
   alert('Progress reset! Reloading...');
   setTimeout(() => window.location.reload(), 1000);
+}
+</script>
+  <script>
+  const playerId = 'cat' + Math.floor(Math.random() * 10000);
+const backendURL = 'https://ucc-backend-dltx.onrender.com';
+
+async function updateLeaderboard() {
+    await fetch(backendURL + '/leaderboard', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            playerId: playerId, 
+            name: playerId, 
+            fish: fish 
+        })
+    });
+    
+    const response = await fetch(backendURL + '/leaderboard');
+    const leaderboard = await response.json();
+    
+    const html = leaderboard.map((player, index) => 
+        `<div>${index + 1}. ${player.name}${player.name === playerId ? ' (You)' : ''} - ${player.fish} 🐟</div>`
+    ).join('');
+    
+    document.getElementById('leaderboard').innerHTML = html;
 }
 </script>
 </body>
