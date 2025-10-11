@@ -1,63 +1,50 @@
-// --- Advanced Anti-Cheat for UCC ---
-const maxClicksPerSecond = 10;
-let lastClickTime = Date.now();
+// simple-anti-cheat.js
 
-// track suspicious global variables/functions
-const allowedGlobals = new Set([
-  "window", "document", "alert", "console", "Math", "fetch",
-  "setTimeout", "setInterval", "clearTimeout", "clearInterval"
-]);
+const AntiCheat = (() => {
+  let lastClick = 0;
+  const clickTimes = [];
 
-// CLICK DETECTION
-function handleClick() {
-  const now = Date.now();
-  const delta = now - lastClickTime;
-
-  if(delta < 1000 / maxClicksPerSecond) {
-    alert("Cheating detected! Slow down! 🐾");
-    console.warn("Auto-clicker detected!");
-    return false; // block click gain
+  function report(reason) {
+    alert("cheating detected: " + reason);
   }
 
-  lastClickTime = now;
-  return true;
-}
+  // Auto-click detection
+  function handleClick() {
+    const now = Date.now();
+    if (lastClick) {
+      const diff = now - lastClick;
+      clickTimes.push(diff);
+      if (clickTimes.length > 20) clickTimes.shift();
 
-// INJECTED JS / BOOKMARKLET DETECTION
-function checkInjectedJS() {
-  // check for unexpected globals
-  for(let key in window) {
-    if(!allowedGlobals.has(key)) {
-      alert(`Cheating detected! Suspicious global: ${key}`);
-      console.warn(`Suspicious global detected: ${key}`);
+      const mean = clickTimes.reduce((a,b)=>a+b,0)/clickTimes.length;
+      if (mean < 120) report("auto-clicking detected");
     }
+    lastClick = now;
   }
 
-  // check for tampered functions (e.g., onclick overrides)
-  const suspiciousEvents = ["onclick", "onload", "onmousemove", "onmousedown"];
-  suspiciousEvents.forEach(eventName => {
-    document.querySelectorAll("*").forEach(el => {
-      const handler = el[eventName];
-      if(handler && !handler.toString().includes("handleClick")) {
-        alert(`Cheating detected! Modified ${eventName} found on element.`);
-        console.warn(`Tampered ${eventName} detected on element:`, el);
+  // Script injection detection
+  function observeScripts() {
+    const observer = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const node of m.addedNodes) {
+          if (node.tagName === "SCRIPT") {
+            if (!node.dataset.uccexempt) report("script injected");
+          }
+        }
       }
     });
-  });
+    observer.observe(document, {childList: true, subtree: true});
+  }
 
-  // detect dynamically added script tags
-  document.querySelectorAll("script").forEach(script => {
-    if(!script.dataset.uccexempt) {
-      alert("Cheating detected! Unexpected script found.");
-      console.warn("Unexpected script detected!", script.src || "inline");
+  function init(clickButtonSelector) {
+    if (clickButtonSelector) {
+      const btn = document.querySelector(clickButtonSelector);
+      if (btn) btn.addEventListener("clicker", handleClick);
+    } else {
+      document.addEventListener("clicker", handleClick);
     }
-  });
-}
+    observeScripts();
+  }
 
-// RUN IN INTERVAL
-setInterval(checkInjectedJS, 2000);
-
-// HOOK YOUR CLICK BUTTON
-document.getElementById("clicker").addEventListener("click", (e) => {
-  if(!handleClick()) e.preventDefault();
-});
+  return { init };
+})();
