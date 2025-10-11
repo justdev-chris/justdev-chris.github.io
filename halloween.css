@@ -1,0 +1,199 @@
+/* =========================
+   HALLOWEEN THEME - UCC
+========================= */
+
+/* BODY */
+body {
+  background-color: #1a1a1a; /* dark spooky background */
+  font-family: Arial, sans-serif;
+  color: #fff;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* =========================
+   FLOATING EMOJIS BACKGROUND
+========================= */
+.stars::before,
+.stars::after {
+  content: "🎃👻🕸️🦇🕷️";
+  position: absolute;
+  font-size: 2rem;
+  animation: floatEmojis 20s linear infinite;
+  opacity: 0.6;
+}
+
+.stars::after {
+  animation-duration: 30s;
+  left: 50%;
+  top: 50%;
+}
+
+@keyframes floatEmojis {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-600px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* =========================
+   HEADERS & TITLES
+========================= */
+h1, h2, h3 {
+  text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ffea00, 0 0 30px #ff6b6b;
+  color: #fffae6;
+}
+
+/* =========================
+   NAV BUTTONS
+========================= */
+.nav-btn {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 5px;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: linear-gradient(45deg, #ffea00, #ff6b6b);
+  transform: scale(1.1);
+  text-shadow: 0 0 10px #fff;
+}
+
+/* =========================
+   GAME PANELS
+========================= */
+.panel, #loreScreen, #minigamesScreen, #creditsScreen {
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #ff6b6b;
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0 0 20px #ff6b6b inset, 0 0 15px #ffea00;
+}
+
+/* =========================
+   SHOP ITEMS
+========================= */
+.shop .item {
+  background: rgba(0,0,0,0.5);
+  border: 2px dashed #ff6b6b;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.shop .item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ffea00, 0 0 20px #ff6b6b;
+}
+
+/* =========================
+   COMBO METER
+========================= */
+#comboMeterDisplay div {
+  background: rgba(255,255,255,0.1);
+  border-radius: 25px;
+  height: 20px;
+  width: 300px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 10px #ff6b6b inset, 0 0 10px #ffea00;
+}
+
+#comboFill {
+  background: linear-gradient(90deg, #ff6b6b, #ffea00);
+  height: 100%;
+  width: 0%;
+  border-radius: 25px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px #ffea00;
+}
+
+/* =========================
+   SPECIAL EFFECTS
+========================= */
+#villainInvasion {
+  background: linear-gradient(45deg, #ff6b6b, #ff4757);
+  color: white;
+  padding: 30px;
+  border-radius: 20px;
+  z-index: 2000;
+  text-align: center;
+  border: 3px solid #fff;
+  box-shadow: 0 0 30px #ff6b6b, 0 0 20px #ffea00;
+}
+
+/* scroll message */
+body div[style*="Scroll down"] {
+  animation: pulse 2s infinite;
+  color: #ffea00;
+  text-shadow: 0 0 10px #ff6b6b;
+}
+
+/* =========================
+   PULSE ANIMATION
+========================= */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* =========================
+   MINI GAMES
+========================= */
+.minigame-container {
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #4ecdc4;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px #4ecdc4 inset, 0 0 15px #ff6b6b;
+}
+
+/* =========================
+   ADVENTURE BUTTON
+========================= */
+#gameContainer button[onclick*="startAdventure"] {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border-radius: 15px;
+  font-size: 1.2em;
+  padding: 15px 30px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-shadow: 0 0 5px #000;
+}
+
+#gameContainer button[onclick*="startAdventure"]:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ffea00, 0 0 15px #ff6b6b;
+}
+
+/* =========================
+   CAT EVOLUTION
+========================= */
+#catEvolution {
+  background: rgba(0,0,0,0.5);
+  border: 2px solid #ffea00;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 0 15px #ff6b6b inset, 0 0 15px #ffea00;
+}
+
+/* =========================
+   SECRET CLICKABLES
+========================= */
+#secretClickables {
+  background: rgba(0,0,0,0.4);
+  border: 1px dashed #ffea00;
+  padding: 10px;
+  border-radius: 10px;
+}
