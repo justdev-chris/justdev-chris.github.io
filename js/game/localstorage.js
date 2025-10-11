@@ -1,15 +1,3 @@
-// Game data
-let fish = 0;
-let powerLevel = 1;
-let minigameWins = 0;
-let unlockedSkins = ['default'];
-let totalClicks = 0;
-let fishPerSecond = 0;
-let comboMeter = 0;
-let purrCrystals = 0;
-let evolutionLevel = 0;
-let catSkin = 'default';
-
 // Save selected game data to localStorage
 function saveGame() {
   const gameState = {
