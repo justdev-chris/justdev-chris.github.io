@@ -384,7 +384,10 @@ function confirmReset() {
 }
 </script>
   <script>
-  const playerId = 'cat' + Math.floor(Math.random() * 10000);
+// Load playerId from localStorage or create new one
+const playerId = localStorage.getItem('catPlayerId') || 'cat' + Math.floor(Math.random() * 10000);
+localStorage.setItem('catPlayerId', playerId);
+
 const backendURL = 'https://ucc-backend-dltx.onrender.com';
 
 async function updateLeaderboard() {
