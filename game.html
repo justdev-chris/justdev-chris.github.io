@@ -6,6 +6,37 @@
   <title>🐱 Ultimate Cat Clicker 🐱</title>
   <link rel="stylesheet" href="halloween.css">
   <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+  <style>
+.reset-confirm {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(45deg, #2d1b35, #1a0d1f);
+  padding: 30px;
+  border-radius: 15px;
+  border: 3px solid #ff6b6b;
+  z-index: 3000;
+  text-align: center;
+  display: none;
+  color: white;
+}
+
+.reset-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.reset-yes {
+  background: #ff6b6b !important;
+}
+
+.reset-no {
+  background: #4ecdc4 !important;
+}
+</style>
 </head>
 <body>
   <div class="stars"></div>
@@ -16,6 +47,7 @@
     <button class="nav-btn" onclick="showScreen('minigames')">🎯 Mini Games</button>
     <button class="nav-btn" onclick="startAdventure()">🏰 Adventure</button>
     <button class="nav-btn" onclick="showScreen('credits')">📜 Credits</button>
+    <button class="nav-btn reset-btn" onclick="showResetConfirm()">🗑️ Reset</button>
   </div>
 
   <!-- the starting page where u start ur adventeruue (adventure, was lazy to correct it) -->
@@ -142,6 +174,15 @@
       <button id="defendButton" style="padding: 15px 30px; font-size: 1.2em; background: #4ecdc4; border: none; border-radius: 10px; color: white; cursor: pointer;" onclick="defendClick()">🛡️ DEFEND!</button>
       <div>Time left: <span id="invasionTimer">30</span>s</div>
     </div>
+
+<div id="resetConfirm" class="reset-confirm">
+  <h3>⚠️ RESET PROGRESS? ⚠️</h3>
+  <p>This will delete ALL your progress and cannot be undone!</p>
+  <div class="reset-buttons">
+    <button class="nav-btn reset-yes" onclick="confirmReset()">✅ YES, RESET</button>
+    <button class="nav-btn reset-no" onclick="cancelReset()">❌ CANCEL</button>
+  </div>
+</div>
 
     <div class="game-panels">
       <div class="panel" id="storyPanel">
@@ -318,5 +359,21 @@
   <script src="js/game/music.js"></script>
   <script src="js/game/anti-cheat.js"></script>
   <script src="js/game/localstorage.js"></script>
+  <script>
+function showResetConfirm() {
+  document.getElementById('resetConfirm').style.display = 'block';
+}
+
+function cancelReset() {
+  document.getElementById('resetConfirm').style.display = 'none';
+}
+
+function confirmReset() {
+  localStorage.removeItem('catClickerSave');
+  document.getElementById('resetConfirm').style.display = 'none';
+  alert('Progress reset! Reloading...');
+  setTimeout(() => window.location.reload(), 1000);
+}
+</script>
 </body>
 </html>
