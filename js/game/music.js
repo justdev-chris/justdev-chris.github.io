@@ -1,6 +1,6 @@
 // music logic
 
-const soundtrack = new Audio("purrfect day.wav"); // if someone else copies it they can have a different custom track they own
+const soundtrack = new Audio("music/purrfect day.wav"); // if someone else copies it they can have a different custom track they own
 soundtrack.loop = true;
 soundtrack.volume = 0; // fade in
 
