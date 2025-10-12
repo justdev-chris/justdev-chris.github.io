@@ -44,35 +44,42 @@ dailyQuests = [
 ];
 
 function clickCat() {
-  fish += 1;
-  totalClicks += 1;
-  
-  // Update combo meter
-  comboMeter = Math.min(comboMeter + 1, 100);
-  if (comboMeter >= 100) {
-    showCatFrenzy();
-    comboMeter = 0;
-  }
-  
-  // Click effect
-  const effect = document.createElement('div');
-  effect.className = 'click-effect';
-  effect.textContent = '+1 🍬';
-  document.getElementById('clicker').appendChild(effect);
-  
-  setTimeout(() => effect.remove(), 1000);
+    let clickPower = 1;
+    
+    // Apply golden cat upgrade
+    if (window.baseClickPower) {
+        clickPower = window.baseClickPower;
+    }
+    
+    fish += clickPower;
+    totalClicks += 1;
+    
+    // Update combo meter
+    comboMeter = Math.min(comboMeter + 1, 100);
+    if (comboMeter >= 100) {
+        showCatFrenzy();
+        comboMeter = 0;
+    }
+    
+    // Click effect
+    const effect = document.createElement('div');
+    effect.className = 'click-effect';
+    effect.textContent = `+${clickPower} 🍬`;
+    document.getElementById('clicker').appendChild(effect);
+    
+    setTimeout(() => effect.remove(), 1000);
 
-  // Random floating fish
-  if (Math.random() < 0.3) {
-    createFloatingFish();
-  }
+    // Random floating fish
+    if (Math.random() < 0.3) {
+        createFloatingFish();
+    }
 
-  // Check for villain invasion
-  if (Math.random() < 0.001 && !isVillainInvasion) {
-    startVillainInvasion();
-  }
+    // Check for villain invasion
+    if (Math.random() < 0.001 && !isVillainInvasion) {
+        startVillainInvasion();
+    }
 
-  updateDisplay();
+    updateDisplay();
 }
 
 function defendClick() {
@@ -142,7 +149,47 @@ function prestige() {
 }
 
 function buyCrystalUpgrade(upgradeType) {
-  showNotification('Crystal upgrades coming soon!', 'info');
+    const upgrades = {
+        autoClicker: { cost: 5, effect: "Auto-clicks every 0.1s" },
+        goldenCat: { cost: 10, effect: "+1000% click power" }
+    };
+
+    const upgrade = upgrades[upgradeType];
+    
+    if (!upgrade) {
+        showNotification('Unknown upgrade!', 'error');
+        return;
+    }
+
+    if (purrCrystals < upgrade.cost) {
+        showNotification(`Not enough Purr Crystals! Need ${upgrade.cost} 💎`, 'error');
+        return;
+    }
+
+    // Apply the upgrade
+    purrCrystals -= upgrade.cost;
+    
+    switch(upgradeType) {
+        case 'autoClicker':
+            // Add auto-clicker that clicks 10 times per second
+            if (!window.autoClickerInterval) {
+                window.autoClickerInterval = setInterval(() => {
+                    fish += 1;
+                    totalClicks += 1;
+                    updateDisplay();
+                }, 100);
+            }
+            break;
+            
+        case 'goldenCat':
+            // Store base click power and apply multiplier
+            if (!window.baseClickPower) window.baseClickPower = 1;
+            window.baseClickPower = 11; // +1000% = 11x
+            break;
+    }
+
+    showNotification(`✅ Purchased ${upgradeType === 'autoClicker' ? 'Auto Clicker Supreme' : 'Golden Cat Form'}! ${upgrade.effect}`, 'success');
+    updateDisplay();
 }
 
 function secretClick(location) {
