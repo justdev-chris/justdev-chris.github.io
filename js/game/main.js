@@ -64,7 +64,7 @@ function clickCat() {
     // Click effect
     const effect = document.createElement('div');
     effect.className = 'click-effect';
-    effect.textContent = `+${clickPower} 🍬`;
+    effect.textContent = `+${clickPower} 🍗`;
     document.getElementById('clicker').appendChild(effect);
     
     setTimeout(() => effect.remove(), 1000);
