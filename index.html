@@ -118,11 +118,11 @@
 
 <!-- Loading Screen -->
 <div id="loading" class="flex">
-  <div id="loading-cat">🦃</div>
+  <div id="loading-cat"></div>
   <div id="loading-bar-container">
     <div id="loading-bar"></div>
   </div>
-  <p>Loading Thanksgiving Feast...</p>
+  <p>Loading...</p>
 </div>
 
 <!-- Home -->
@@ -140,7 +140,7 @@
   
   <div id="content">
     <h1 class="welcome-text">Ultimate Cat Clicker</h1>
-    <p class="subtitle">Thanksgiving Edition - Collect turkey legs and feast!</p>
+    <p class="subtitle">Thanksgiving Edition - Click & Collect turkey legs!</p>
     <a id="play-btn" href="game.html">Play 🍗</a>
   </div>
 </div>
@@ -180,16 +180,8 @@ function showHome(){
   if(location.hostname !== 'catsdevs.online'){
     alert('You are playing UCC on a different website. This may be a modified version of UCC. For more info, visit https://catsdevs.online/modified. You can continue playing but it may not be official.');
   }
-
-  // Play button placeholder
-  const playBtn = document.getElementById('play-btn');
-  const audio = new Audio('music/midday paws.wav');
-  playBtn.onclick = ()=>{
-    alert("Happy Thanksgiving! Let's feast! 🍗");
-    audio.play();
-  };
 }
-
+ 
 // Create falling leaves
 function createFallLeaves(){
   const container = document.getElementById('leaves-container');
