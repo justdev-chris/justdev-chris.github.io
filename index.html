@@ -3,47 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Cat Clicker - Thanksgiving</title>
+<title>Ultimate Cat Clicker - Christmas</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-  * {margin:0; padding:0; box-sizing:border-box; font-family:'Georgia', serif;}
+  * {margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;}
   body, html {height:100%; overflow:hidden;}
   
   /* Splash / Dev Prods */
   #splash {
     position:fixed; top:0; left:0; width:100%; height:100%; 
     display:flex; align-items:center; justify-content:center; flex-direction:column; 
-    background: linear-gradient(135deg, #8b4513 0%, #2c1b0f 100%); 
-    color:#f5deb3; z-index:100;
+    background: linear-gradient(135deg, #0d3b1c 0%, #081c0a 100%); 
+    color:#e8f4ea; z-index:100;
   }
-  #splash img {width:120px; height:120px; border-radius:50%; margin-bottom:20px; transform:translateY(50px); animation:slideDown 1s forwards; border:3px solid #daa520;}
-  #splash p {margin-top:10px; font-size:18px; opacity:0; animation:fadeIn 1s forwards 1s; color:#f5deb3;}
+  #splash img {width:120px; height:120px; border-radius:50%; margin-bottom:20px; transform:translateY(50px); animation:slideDown 1s forwards; border:3px solid #ffd700;}
+  #splash p {margin-top:10px; font-size:18px; opacity:0; animation:fadeIn 1s forwards 1s; color:#e1f7e7;}
   @keyframes slideDown {to {transform:translateY(0);}}
   @keyframes fadeIn {to {opacity:1;}}
   
   /* Loading screen */
   #loading {
     display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
-    background: linear-gradient(135deg, #2c1b0f 0%, #1a0f08 100%); 
-    color:#f5deb3; flex-direction:column; align-items:center; justify-content:center; z-index:90;
+    background: linear-gradient(135deg, #0d3b1c 0%, #081c0a 100%); 
+    color:#e1f7e7; flex-direction:column; align-items:center; justify-content:center; z-index:90;
   }
   #loading-bar-container {
-    width:70%; height:30px; background:#5d371b; border-radius:15px; 
-    margin-top:20px; position:relative; overflow:hidden; border:2px solid #daa520;
+    width:70%; height:30px; background:#1a5b2c; border-radius:15px; 
+    margin-top:20px; position:relative; overflow:hidden; border:2px solid #ffd700;
   }
   #loading-bar {
-    height:100%; width:0; background:linear-gradient(90deg, #d2691e, #daa520); border-radius:15px;
+    height:100%; width:0; background:linear-gradient(90deg, #b22222, #228b22); border-radius:15px;
   }
   #loading-cat {position:absolute; top:-25px; left:0; font-size:25px;}
   
   /* Home */
   #home {
     display:none; height:100%; width:100%; 
-    background: linear-gradient(135deg, #8b4513 0%, #2c1b0f 50%, #1a0f08 100%); 
+    background: linear-gradient(135deg, #0d3b1c 0%, #081c0a 50%, #0a150a 100%); 
     display:flex; position:relative; overflow:hidden;
   }
   
-  /* Thanksgiving background elements */
+  /* Christmas background elements */
   .fall-leaf {
     position:absolute; font-size:24px; opacity:0.7;
     animation:fall 8s linear infinite;
@@ -54,38 +54,38 @@
   }
   
   nav {
-    width:80px; background:rgba(139, 69, 19, 0.8); 
+    width:80px; background:rgba(178, 34, 34, 0.8); 
     display:flex; flex-direction:column; align-items:center; padding-top:20px;
-    border-right:2px solid #daa520;
+    border-right:2px solid #ffd700;
   }
   nav a {
-    color:#f5deb3; margin:15px 0; font-size:24px; text-decoration:none;
+    color:#fff; margin:15px 0; font-size:24px; text-decoration:none;
     transition:all 0.3s ease;
   }
   nav a:hover {
-    transform:scale(1.2); color:#daa520;
+    transform:scale(1.2); color:#ffd700;
   }
   
   #content {
     flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; 
-    color:#f5deb3; position:relative;
+    color:#e1f7e7; position:relative;
   }
   
   /* Play Button */
   #play-btn {
-    background: linear-gradient(45deg, #8b4513, #d2691e);
-    color:#f5deb3; padding:20px 40px; font-size:24px; text-decoration:none;
-    border-radius:25px; border:3px solid #daa520; margin-top:30px;
-    box-shadow:0 8px 25px rgba(139,69,19,0.5);
+    background: linear-gradient(45deg, #b22222, #228b22);
+    color:#fff; padding:20px 40px; font-size:24px; text-decoration:none;
+    border-radius:25px; border:3px solid #ffd700; margin-top:30px;
+    box-shadow:0 8px 25px rgba(178,34,34,0.5);
     transition:all 0.3s ease; font-weight:bold;
     text-shadow:2px 2px 4px rgba(0,0,0,0.5);
   }
   #play-btn:hover {
-    transform:scale(1.1); box-shadow:0 12px 35px rgba(210,105,30,0.7);
-    background: linear-gradient(45deg, #d2691e, #8b4513);
+    transform:scale(1.1); box-shadow:0 12px 35px rgba(255,0,0,0.7);
+    background: linear-gradient(45deg, #ff0000, #00aa00);
   }
   
-  /* Floating Thanksgiving emojis */
+  /* Floating Christmas emojis */
   .emoji {
     position:absolute; font-size:20px; animation:float 5s linear infinite;
     text-shadow:2px 2px 4px rgba(0,0,0,0.5);
@@ -97,13 +97,13 @@
   
   .welcome-text {
     font-size:48px; margin-bottom:20px; text-align:center;
-    background:linear-gradient(45deg, #daa520, #f5deb3, #d2691e);
+    background:linear-gradient(45deg, #ffd700, #ffffff, #b22222, #1e90ff);
     -webkit-background-clip:text; -webkit-text-fill-color:transparent;
     background-clip:text; text-shadow:3px 3px 6px rgba(0,0,0,0.3);
   }
   
   .subtitle {
-    font-size:18px; color:#daa520; text-align:center;
+    font-size:18px; color:#a3d9ff; text-align:center;
     max-width:400px; line-height:1.5;
   }
 </style>
@@ -113,12 +113,12 @@
 <!-- Splash Screen -->
 <div id="splash">
   <img src="https://avatars.githubusercontent.com/u/185311413" alt="Dev PFP">
-  <p>Made by justdev-chris | Thanksgiving Edition</p>
+  <p>Made by justdev-chris | Christmas Edition</p>
 </div>
 
 <!-- Loading Screen -->
 <div id="loading" class="flex">
-  <div id="loading-cat"></div>
+  <div id="loading-cat">🎄</div>
   <div id="loading-bar-container">
     <div id="loading-bar"></div>
   </div>
@@ -127,12 +127,12 @@
 
 <!-- Home -->
 <div id="home">
-  <!-- Falling leaves background -->
+  <!-- Falling snowflakes background -->
   <div id="leaves-container"></div>
   
   <nav>
     <a href="#" title="Home">🏠</a>
-    <a href="https://github.com/justdev-chris" target="_blank" title="UCC">🦃</a>
+    <a href="https://github.com/justdev-chris" target="_blank" title="UCC">🎁</a>
     <a href="/GMFIXV2/" title="Games">🎮</a>
     <a href="assets/seal.html" title="Seal">🦭</a>
     <a href="/about/" title="About">🐈</a>
@@ -140,8 +140,8 @@
   
   <div id="content">
     <h1 class="welcome-text">Ultimate Cat Clicker</h1>
-    <p class="subtitle">Thanksgiving Edition - Click & Collect turkey legs!</p>
-    <a id="play-btn" href="game.html">Play 🍗</a>
+    <p class="subtitle">Christmas Edition - Click & collect presents!</p>
+    <a id="play-btn" href="game.html">Play 🎄</a>
   </div>
 </div>
 
@@ -173,7 +173,7 @@ function startLoading(){
 function showHome(){
   document.getElementById('loading').style.display='none';
   document.getElementById('home').style.display='flex';
-  createFallLeaves();
+  createSnowflakes();
   spawnEmojis();
   
   // Host check
@@ -182,28 +182,28 @@ function showHome(){
   }
 }
  
-// Create falling leaves
-function createFallLeaves(){
+// Create falling snowflakes
+function createSnowflakes(){
   const container = document.getElementById('leaves-container');
-  const leaves = ['🍂', '🍁', '🥧', '🌰'];
+  const snowflakes = ['❄️', '🌨️', '☃️', '🎄', '🎁', '🧦'];
   
-  for(let i=0; i<25; i++){
-    let leaf = document.createElement('div');
-    leaf.classList.add('fall-leaf');
-    leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
-    leaf.style.left = Math.random() * 100 + '%';
-    leaf.style.animationDelay = Math.random() * 5 + 's';
-    leaf.style.fontSize = (20 + Math.random() * 15) + 'px';
-    container.appendChild(leaf);
+  for(let i=0; i<30; i++){
+    let flake = document.createElement('div');
+    flake.classList.add('fall-leaf');
+    flake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+    flake.style.left = Math.random() * 100 + '%';
+    flake.style.animationDelay = Math.random() * 5 + 's';
+    flake.style.fontSize = (20 + Math.random() * 15) + 'px';
+    container.appendChild(flake);
   }
 }
 
-// Floating Thanksgiving emojis
+// Floating Christmas emojis
 function spawnEmojis(){
   const content = document.getElementById('content');
-  const emojis = ['🍗', '🦃', '🥧', '🍂', '🌽', '🍠', '🍎'];
+  const emojis = ['🎁', '🎄', '❄️', '☃️', '🦌', '🌟', '🔔', '🎅', '🤶'];
   
-  for(let i=0;i<15;i++){
+  for(let i=0;i<20;i++){
     let e=document.createElement('div');
     e.classList.add('emoji');
     e.style.left=Math.random()*80+'%';
