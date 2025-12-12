@@ -64,7 +64,7 @@ function clickCat() {
     // Click effect
     const effect = document.createElement('div');
     effect.className = 'click-effect';
-    effect.textContent = `+${clickPower} 🍗`;
+    effect.textContent = `+${clickPower} 🎄`;
     document.getElementById('clicker').appendChild(effect);
     
     setTimeout(() => effect.remove(), 1000);
@@ -224,7 +224,7 @@ function showCatFrenzy() {
 function createFloatingFish() {
   const fish = document.createElement('div');
   fish.className = 'floating-fish';
-  fish.textContent = '🍗';
+  fish.textContent = '🎄';
   fish.style.left = Math.random() * (window.innerWidth - 50) + 'px';
   fish.style.top = Math.random() * (window.innerHeight - 50) + 'px';
   document.body.appendChild(fish);
