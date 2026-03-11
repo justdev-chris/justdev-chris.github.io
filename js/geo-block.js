@@ -1,15 +1,20 @@
 // California Age Assurance Act (AB 1043) Compliance
-// Geoblocks California users from accessing applications
+// geoblocks california users from accessing applications
 
 (async function() {
   try {
-    // Fetch user's IP geolocation data
+    // fetch region/ip
     const response = await fetch('https://ipapi.co/json/');
-    const data = await response.json();
-    
-    // Check if user is in California
+    let data = await response.json();
+
+    // DEBUGGING PURPOSES
+    if (location.search.includes("forceCA")) {
+      data = { region: "California", region_code: "CA" };
+    }
+
+    // region checker
     if (data.region === 'California' || data.region_code === 'CA') {
-      // Create blocking overlay
+      // blocking overlay (securly ahh)
       const overlay = document.createElement('div');
       overlay.id = 'ca-block-overlay';
       overlay.style.cssText = `
@@ -26,7 +31,6 @@
         font-family: Arial, sans-serif;
       `;
       
-      // Create message container
       const message = document.createElement('div');
       message.style.cssText = `
         background: #1a1a1a;
@@ -55,10 +59,9 @@
       overlay.appendChild(message);
       document.body.appendChild(overlay);
       
-      // Disable all downloads and interactions
+      // this so ca users cant download anything!
       document.body.style.overflow = 'hidden';
       
-      // Prevent any download attempts
       document.querySelectorAll('a[href*="download"], button').forEach(el => {
         el.disabled = true;
         el.style.pointerEvents = 'none';
@@ -66,7 +69,6 @@
       });
     }
   } catch (error) {
-    // If geolocation fails, allow access (fail-open approach)
     console.log('Geolocation check failed, allowing access');
   }
 })();
